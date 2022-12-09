@@ -18,6 +18,14 @@ while(True):
     # desired button of your choice
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+    
+    # When cross button is clicked the window closed.
+    # That is its a alternate quit button
+    try:
+        if(cv2.getWindowProperty('frame', 0) < 0):
+            break
+    except:
+        break
 
 # After the loop release the cap object
 vid.release()
