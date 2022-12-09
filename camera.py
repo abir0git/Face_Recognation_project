@@ -10,6 +10,9 @@ while(True):
     # by frame
     ret, frame = vid.read()
 
+    # To resize the camera window and to use maximize button
+    cv2.namedWindow("frame", cv2.WINDOW_NORMAL)
+
     # Display the resulting frame
     cv2.imshow('frame', frame)
 	
@@ -18,7 +21,7 @@ while(True):
     # desired button of your choice
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-    
+
     # When cross button is clicked the window closed.
     # That is its a alternate quit button
     try:
