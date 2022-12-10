@@ -2,6 +2,7 @@ import cv2
 
 # Load the cascade
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+face_cascade_side = cv2.CascadeClassifier('haarcascade_profileface.xml')
 
 # To capture video from webcam. 
 cap = cv2.VideoCapture(0)
@@ -16,9 +17,16 @@ while (True):
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         # Detect the faces
         faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+        faces_side = face_cascade_side.detectMultiScale(gray, 1.1, 4)
         # Draw the rectangle around each face
+        flag = 0
         for (x, y, w, h) in faces:
             cv2.rectangle(img, (x, y), (x+w, y+h), (0, 0, 255), 2)
+            flag = 1
+        # if no front face then check for side face
+        if(flag == 0):
+            for (x, y, w, h) in faces_side:
+                cv2.rectangle(img, (x, y), (x+w, y+h), (0, 0, 255), 2)
         # Display
         cv2.imshow('FACE DETECTION SOFTWARE', img)
     except:
